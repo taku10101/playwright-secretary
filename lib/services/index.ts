@@ -3,14 +3,9 @@
  */
 
 import { ServiceDefinition } from './types';
-import { gmailService } from './gmail';
-import { slackService } from './slack';
-import { notionService } from './notion';
 
 export const services: Record<string, ServiceDefinition> = {
-  gmail: gmailService,
-  slack: slackService,
-  notion: notionService,
+  // Services will be registered here
 };
 
 export function getService(serviceId: string): ServiceDefinition | null {

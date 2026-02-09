@@ -1,0 +1,71 @@
+{
+  "id": "freee-navigate-after-login",
+  "name": "freee会計ログイン後ナビゲーション",
+  "service": "freee",
+  "category": "navigation",
+  "description": "freee会計にログイン後、指定されたページに遷移します",
+  "parameters": [
+    {
+      "name": "targetUrl",
+      "type": "string",
+      "required": true,
+      "description": "遷移先のURL（例: https://secure.freee.co.jp/...）",
+      "validation": {
+        "pattern": "^https://secure\\.freee\\.co\\.jp/"
+      }
+    },
+    {
+      "name": "waitForSelector",
+      "type": "string",
+      "required": false,
+      "description": "ページ読み込み後に待機するセレクタ（オプション）"
+    }
+  ],
+  "steps": [
+    {
+      "order": 1,
+      "type": "navigate",
+      "value": "{{targetUrl}}",
+      "description": "指定されたページに遷移",
+      "expected": "ページが読み込まれる",
+      "timeout": 30000
+    },
+    {
+      "order": 2,
+      "type": "waitForLoadState",
+      "value": "networkidle",
+      "description": "ネットワークアイドル状態を待機",
+      "timeout": 30000,
+      "optional": true
+    },
+    {
+      "order": 3,
+      "type": "waitForSelector",
+      "selector": "{{waitForSelector}}",
+      "description": "指定された要素が表示されるまで待機",
+      "timeout": 10000,
+      "optional": true,
+      "condition": "{{waitForSelector}}"
+    }
+  ],
+  "validation": [
+    {
+      "type": "url",
+      "condition": "contains",
+      "expected": "secure.freee.co.jp",
+      "timeout": 5000,
+      "errorMessage": "freeeのドメインに遷移していません"
+    }
+  ],
+  "metadata": {
+    "createdAt": "2026-02-09T00:00:00.000Z",
+    "updatedAt": "2026-02-09T00:00:00.000Z",
+    "usageCount": 0,
+    "successCount": 0,
+    "failureCount": 0,
+    "successRate": 0,
+    "averageDuration": 0,
+    "tags": ["freee", "navigation", "after-login"],
+    "version": "1.0.0"
+  }
+}

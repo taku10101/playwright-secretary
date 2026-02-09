@@ -117,26 +117,12 @@ export class ServiceExecutor {
 
     try {
       switch (service.id) {
-        case 'gmail':
-          await page.goto('https://mail.google.com');
-          await page.waitForLoadState('networkidle');
-          // Check if logged in
-          const isLoggedIn = await page.locator('[aria-label="Compose"]').isVisible().catch(() => false);
-          if (!isLoggedIn) {
-            await page.waitForSelector('[aria-label="Compose"]', { timeout: 60000 });
-          }
-          break;
-
-        case 'slack':
-          const workspace = serviceConfig.settings?.workspace || 'your-workspace';
-          await page.goto(`https://${workspace}.slack.com`);
+        case 'freee':
+          await page.goto('https://secure.freee.co.jp/');
           await page.waitForLoadState('networkidle');
           break;
-
-        case 'notion':
-          await page.goto('https://www.notion.so');
-          await page.waitForLoadState('networkidle');
-          break;
+        default:
+          throw new Error(`Unsupported service: ${service.id}`);
       }
     } finally {
       await page.close();

@@ -1,0 +1,28 @@
+{
+  "name": "@claude-skills/secretary",
+  "version": "1.0.0",
+  "description": "AI Secretary Skill for Claude Code - Automated web service operations with business reporting",
+  "main": "index.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "claude",
+    "skill",
+    "playwright",
+    "automation",
+    "secretary",
+    "ai"
+  ],
+  "author": "Playwright Secretary Team",
+  "license": "MIT",
+  "dependencies": {
+    "playwright": "^1.58.2"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0",
+    "typescript": "^5"
+  }
+}

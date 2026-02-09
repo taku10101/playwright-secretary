@@ -17,7 +17,7 @@ interface UseServiceFormReturn {
 }
 
 export function useServiceForm({ onSuccess }: UseServiceFormProps): UseServiceFormReturn {
-  const [serviceType, setServiceType] = useState<ServiceType>('gmail');
+  const [serviceType, setServiceType] = useState<ServiceType>('freee');
   const [serviceName, setServiceName] = useState('');
   const [workspace, setWorkspace] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -31,7 +31,7 @@ export function useServiceForm({ onSuccess }: UseServiceFormProps): UseServiceFo
         name: serviceName,
         enabled: true,
         credentials: {},
-        settings: serviceType === 'slack' ? { workspace } : {},
+        settings: {},
       };
 
       try {

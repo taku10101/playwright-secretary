@@ -1,10 +1,11 @@
 {
   "model": "sonnet",
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
   "permissions": {
     "defaultMode": "bypassPermissions",
-    "env": {
-      "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
-    },
+
     "allow": [
       "Bash(pnpm biome:check:*)",
       "Bash(pnpm biome:check:write:*)",

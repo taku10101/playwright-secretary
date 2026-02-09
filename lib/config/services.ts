@@ -2,7 +2,7 @@
  * Type definitions for Playwright Secretary Platform
  */
 
-export type ServiceType = 'gmail' | 'slack' | 'notion' | 'generic';
+export type ServiceType = 'freee' | 'generic';
 
 export interface ServiceConfig {
   id: string;

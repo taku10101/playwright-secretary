@@ -1,0 +1,88 @@
+{
+  "name": "secretary",
+  "version": "1.0.0",
+  "displayName": "AI秘書",
+  "description": "自然言語指示でWebサービスを自動操作し、業務報告を生成するAI秘書システム",
+  "author": "Playwright Secretary Team",
+  "icon": "🤖",
+  "tags": ["automation", "playwright", "secretary", "reporting"],
+  "parameters": [
+    {
+      "name": "instruction",
+      "type": "string",
+      "description": "実行したい操作の指示（例: Gmailで田中様にメールを送信）",
+      "required": true
+    },
+    {
+      "name": "mode",
+      "type": "string",
+      "description": "実行モード: explore(探索のみ), plan(計画立案), execute(実行), auto(自動)",
+      "default": "auto",
+      "enum": ["explore", "plan", "execute", "auto"]
+    },
+    {
+      "name": "headless",
+      "type": "boolean",
+      "description": "ヘッドレスモードで実行するか",
+      "default": false
+    },
+    {
+      "name": "confirm",
+      "type": "boolean",
+      "description": "実行前に確認を求めるか",
+      "default": true
+    },
+    {
+      "name": "report",
+      "type": "boolean",
+      "description": "実行後にレポートを生成するか",
+      "default": true
+    }
+  ],
+  "examples": [
+    {
+      "title": "Gmailでメール送信",
+      "command": "/secretary \"Gmailで田中様にプロジェクトの進捗報告メールを送信してください\""
+    },
+    {
+      "title": "Slackにメッセージ投稿",
+      "command": "/secretary \"Slackの#generalチャンネルに'会議は15時から'と投稿してください\""
+    },
+    {
+      "title": "Notionページ作成",
+      "command": "/secretary \"Notionに今日のタスクリストページを作成してください\""
+    },
+    {
+      "title": "UI探索モード",
+      "command": "/secretary --mode explore \"Gmailの画面構造を教えてください\""
+    }
+  ],
+  "permissions": [
+    "browser",
+    "filesystem",
+    "network"
+  ],
+  "settings": {
+    "defaultTimeout": {
+      "type": "number",
+      "description": "デフォルトタイムアウト(ms)",
+      "default": 30000
+    },
+    "maxRetries": {
+      "type": "number",
+      "description": "最大リトライ回数",
+      "default": 3
+    },
+    "screenshotQuality": {
+      "type": "number",
+      "description": "スクリーンショット品質(1-100)",
+      "default": 80
+    },
+    "reportLanguage": {
+      "type": "string",
+      "description": "レポート言語",
+      "default": "ja",
+      "enum": ["ja", "en"]
+    }
+  }
+}

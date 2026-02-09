@@ -11,7 +11,7 @@ Playwrightを使って各種Webサービスを自動操作する秘書プラッ�
 
 ## 特徴
 
-- **Webサービス自動化**: Gmail、Slack、Notionなどを自動操作
+- **Webサービス自動化**: freee会計などのWebサービスを自動操作
 - **設定管理UI**: ブラウザから簡単にサービスを設定
 - **実行履歴追跡**: タスクの実行状況とログを確認
 - **Claude Code CLI統合**: MCP Serverを通じて自然言語でタスク実行
@@ -76,7 +76,7 @@ pnpm dev
 
 3. **configure_service**: サービスを設定
    ```
-   type: gmail | slack | notion
+   type: freee
    name: サービス名
    settings: サービス固有の設定
    ```
@@ -88,32 +88,34 @@ pnpm dev
 Claude Code CLIから:
 
 ```
-Gmailでメールを送信してください
-宛先: example@example.com
-件名: テストメール
-本文: これはテストメールです
+freee会計にログインしてください
 ```
 
 Claude Codeが自動的に:
-1. 設定済みのGmailサービスを検索
+1. 設定済みのfreeeサービスを検索
 2. `execute_task` ツールを呼び出し
 3. Playwrightでブラウザを自動操作
 4. 結果を報告
 
 ## サポートされているサービス
 
-### Gmail
-- `send_email`: メール送信
-- `read_emails`: メール一覧取得
-- `search`: メール検索
+### freee会計
+- `login`: ログイン
 
-### Slack
-- `send_message`: メッセージ送信
-- `read_messages`: メッセージ取得
+#### freeeの設定方法
 
-### Notion
-- `create_page`: ページ作成
-- `search`: 検索
+1. `.env` ファイルを作成（`.env.exsample` を参考に）:
+   ```bash
+   NEXT_PUBLIC_FREEE_EMAIL=your_email@example.com
+   NEXT_PUBLIC_FREEE_PASSWORD=your_password
+   ```
+
+2. ログインスクリプトを実行:
+   ```bash
+   pnpm freee:login
+   ```
+
+ブラウザが起動し、自動的にfreee会計にログインします。
 
 ## アーキテクチャ
 

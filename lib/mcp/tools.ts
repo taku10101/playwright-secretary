@@ -15,7 +15,7 @@ export interface MCPTool {
 export const tools: MCPTool[] = [
   {
     name: 'execute_task',
-    description: 'Execute a predefined action on a configured web service (Gmail, Slack, Notion)',
+    description: 'Execute a predefined action on a configured web service (Freee)',
     inputSchema: {
       type: 'object',
       properties: {
@@ -25,7 +25,7 @@ export const tools: MCPTool[] = [
         },
         actionId: {
           type: 'string',
-          description: 'The action ID to perform (e.g., send_email, send_message, create_page)',
+          description: 'The action ID to perform (e.g., freee_login)',
         },
         parameters: {
           type: 'object',
@@ -52,8 +52,8 @@ export const tools: MCPTool[] = [
       properties: {
         serviceType: {
           type: 'string',
-          enum: ['gmail', 'slack', 'notion'],
-          description: 'The type of service (gmail, slack, or notion)',
+          enum: ['freee'],
+          description: 'The type of service (freee)',
         },
       },
       required: ['serviceType'],
@@ -75,7 +75,7 @@ export const tools: MCPTool[] = [
       properties: {
         type: {
           type: 'string',
-          enum: ['gmail', 'slack', 'notion'],
+          enum: ['freee'],
           description: 'The type of service to configure',
         },
         name: {
@@ -84,7 +84,7 @@ export const tools: MCPTool[] = [
         },
         settings: {
           type: 'object',
-          description: 'Service-specific settings (e.g., workspace for Slack)',
+          description: 'Service-specific settings',
           additionalProperties: true,
         },
       },
