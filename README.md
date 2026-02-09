@@ -1,6 +1,13 @@
 # Playwright秘書プラットフォーム
 
+[![GitHub](https://img.shields.io/badge/GitHub-playwright--secretary-blue?logo=github)](https://github.com/taku10101/playwright-secretary)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![Playwright](https://img.shields.io/badge/Playwright-1.58-green?logo=playwright)](https://playwright.dev/)
+
 Playwrightを使って各種Webサービスを自動操作する秘書プラットフォームです。ユーザーは設定フォームで認証情報やタスク設定を管理し、Claude Code CLIから自然言語で指示を出してサービス操作を実行できます。
+
+🔗 **GitHub Repository**: https://github.com/taku10101/playwright-secretary
 
 ## 特徴
 
