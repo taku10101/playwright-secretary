@@ -10,7 +10,8 @@ import {
 } from '@modelcontextprotocol/sdk/types.js';
 import { tools } from './tools.js';
 import { ConfigStorage } from '../config/storage.js';
-import { taskExecutor } from '../playwright/executor.js';
+import { serviceExecutor } from '../playwright/service-executor.js';
+import { getService, getAllServices } from '../services/index.js';
 
 export class PlaywrightSecretaryServer {
   private server: Server;
@@ -50,10 +51,10 @@ export class PlaywrightSecretaryServer {
       try {
         switch (name) {
           case 'execute_task': {
-            const { serviceId, action, parameters = {} } = args as any;
-            const result = await taskExecutor.executeTask({
+            const { serviceId, actionId, parameters = {} } = args as any;
+            const result = await serviceExecutor.executeTask({
               serviceId,
-              action,
+              actionId,
               parameters,
             });
 
@@ -62,6 +63,60 @@ export class PlaywrightSecretaryServer {
                 {
                   type: 'text',
                   text: JSON.stringify(result, null, 2),
+                },
+              ],
+            };
+          }
+
+          case 'list_service_actions': {
+            const { serviceType } = args as any;
+            const service = getService(serviceType);
+
+            if (!service) {
+              throw new Error(`Service not found: ${serviceType}`);
+            }
+
+            const actions = service.actions.map(action => ({
+              id: action.id,
+              name: action.name,
+              description: action.description,
+              parameters: action.parameters,
+            }));
+
+            return {
+              content: [
+                {
+                  type: 'text',
+                  text: JSON.stringify({
+                    serviceId: service.id,
+                    serviceName: service.name,
+                    actions,
+                  }, null, 2),
+                },
+              ],
+            };
+          }
+
+          case 'list_all_services': {
+            const allServices = getAllServices();
+            const servicesInfo = allServices.map(service => ({
+              id: service.id,
+              name: service.name,
+              description: service.description,
+              icon: service.icon,
+              actionsCount: service.actions.length,
+              actions: service.actions.map(action => ({
+                id: action.id,
+                name: action.name,
+                description: action.description,
+              })),
+            }));
+
+            return {
+              content: [
+                {
+                  type: 'text',
+                  text: JSON.stringify(servicesInfo, null, 2),
                 },
               ],
             };

@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { SettingsHeader } from '@/components/settings/SettingsHeader';
 import { ServiceForm } from '@/components/settings/ServiceForm';
 import { ServiceList } from '@/components/settings/ServiceList';
+import { ServiceActionsList } from '@/components/settings/ServiceActionsList';
 import { useServices } from '@/lib/hooks/useServices';
 import { useServiceForm } from '@/lib/hooks/useServiceForm';
 import { useServiceDelete } from '@/lib/hooks/useServiceDelete';
@@ -49,6 +50,7 @@ export default function SettingsPage() {
                 onWorkspaceChange={setWorkspace}
                 onSubmit={handleSubmit}
               />
+              <ServiceActionsList serviceType={serviceType} />
             </CardContent>
           </Card>
         </TabsContent>

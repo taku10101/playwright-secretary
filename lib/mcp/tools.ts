@@ -15,17 +15,17 @@ export interface MCPTool {
 export const tools: MCPTool[] = [
   {
     name: 'execute_task',
-    description: 'Execute a task on a configured web service (Gmail, Slack, Notion, etc.)',
+    description: 'Execute a predefined action on a configured web service (Gmail, Slack, Notion)',
     inputSchema: {
       type: 'object',
       properties: {
         serviceId: {
           type: 'string',
-          description: 'The ID of the service to use',
+          description: 'The ID of the configured service instance to use',
         },
-        action: {
+        actionId: {
           type: 'string',
-          description: 'The action to perform (e.g., send_email, send_message, create_page)',
+          description: 'The action ID to perform (e.g., send_email, send_message, create_page)',
         },
         parameters: {
           type: 'object',
@@ -33,7 +33,30 @@ export const tools: MCPTool[] = [
           additionalProperties: true,
         },
       },
-      required: ['serviceId', 'action'],
+      required: ['serviceId', 'actionId'],
+    },
+  },
+  {
+    name: 'list_all_services',
+    description: 'Get a list of all available service types and their actions',
+    inputSchema: {
+      type: 'object',
+      properties: {},
+    },
+  },
+  {
+    name: 'list_service_actions',
+    description: 'Get detailed information about actions available for a specific service type',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        serviceType: {
+          type: 'string',
+          enum: ['gmail', 'slack', 'notion'],
+          description: 'The type of service (gmail, slack, or notion)',
+        },
+      },
+      required: ['serviceType'],
     },
   },
   {

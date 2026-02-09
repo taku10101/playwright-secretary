@@ -3,23 +3,26 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { taskExecutor } from '@/lib/playwright/executor';
-import { TaskExecutionRequest } from '@/lib/config/services';
+import { serviceExecutor } from '@/lib/playwright/service-executor';
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json() as TaskExecutionRequest;
+    const body = await request.json();
 
     // Validate request
-    if (!body.serviceId || !body.action) {
+    if (!body.serviceId || !body.actionId) {
       return NextResponse.json(
-        { error: 'Missing required fields: serviceId, action' },
+        { error: 'Missing required fields: serviceId, actionId' },
         { status: 400 }
       );
     }
 
     // Execute task
-    const result = await taskExecutor.executeTask(body);
+    const result = await serviceExecutor.executeTask({
+      serviceId: body.serviceId,
+      actionId: body.actionId,
+      parameters: body.parameters || {},
+    });
 
     return NextResponse.json(result);
   } catch (error) {
