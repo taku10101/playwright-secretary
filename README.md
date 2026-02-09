@@ -99,6 +99,76 @@ Claude Codeが自動的に:
 
 ## サポートされているサービス
 
+### 請求書生成（Invoice Generator） 📄
+
+freeeとは別に、請求書PDFを直接生成できるサービスです。
+
+#### 機能
+- `generate_invoice`: 請求書PDF生成
+- `list_clients`: クライアント一覧取得
+
+#### 設定方法
+
+1. `.env` ファイルに個人情報と銀行情報を追加:
+   ```bash
+   # 個人情報
+   NEXT_PUBLIC_USERNAME=your_username_here
+   NEXT_PUBLIC_EMAIL=your_email_here
+   NEXT_PUBLIC_ADDRESS=your_address_here
+   NEXT_PUBLIC_PHONE=your_phone_number_here
+
+   # 銀行情報
+   NEXT_PUBLIC_BANK_NAME=your_bank_name_here
+   NEXT_PUBLIC_BANK_BRANCH=your_bank_branch_here
+   NEXT_PUBLIC_BANK_TYPE=your_account_type_here  # 普通 or 当座
+   NEXT_PUBLIC_BANK_NUMBER=your_account_number_here
+   ```
+
+2. テストスクリプトで動作確認:
+   ```bash
+   pnpm run test:invoice
+   ```
+
+#### 使用例
+
+```typescript
+// クライアント一覧取得
+{
+  serviceId: "invoice",
+  actionId: "list_clients"
+}
+
+// 請求書生成
+{
+  serviceId: "invoice",
+  actionId: "generate_invoice",
+  parameters: {
+    clientId: "trey-link",  // または "sample-corp", "example-inc"
+    subject: "業務委託費について",
+    items: [
+      {
+        description: "Home Logソフトウェア開発業務委託費用",
+        quantity: 1,
+        unitPrice: 175000
+      }
+    ],
+    outputDir: "./invoices",
+    useLastBusinessDay: false  // false: 25日期限、true: 月末営業日期限
+  }
+}
+```
+
+#### 仕様
+- **請求日**: 実行した月の1日
+- **支払期限**:
+  - デフォルト: その月の25日（土日の場合は前倒しで平日）
+  - `useLastBusinessDay: true` の場合: 月末の営業日
+- **クライアント**: コード上で事前定義された3社から選択
+- **PDF出力先**: `./invoices/` ディレクトリ
+- **日本語対応**: IPA exゴシックフォントを使用し、日本語が正しく表示されます
+
+---
+
 ### freee会計
 - `login`: ログイン
 

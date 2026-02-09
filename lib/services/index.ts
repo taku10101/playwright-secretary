@@ -3,9 +3,10 @@
  */
 
 import { ServiceDefinition } from './types';
+import { invoiceService } from './invoice';
 
 export const services: Record<string, ServiceDefinition> = {
-  // Services will be registered here
+  invoice: invoiceService,
 };
 
 export function getService(serviceId: string): ServiceDefinition | null {
