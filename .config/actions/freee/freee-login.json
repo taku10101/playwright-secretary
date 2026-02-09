@@ -72,15 +72,29 @@
       "value": 2000,
       "description": "ページの完全な読み込みを待機",
       "optional": true
+    },
+    {
+      "order": 8,
+      "type": "navigate",
+      "value": "https://secure.freee.co.jp/",
+      "description": "freeeホームページにリダイレクト",
+      "expected": "freeeホームページが表示される",
+      "timeout": 30000
+    },
+    {
+      "order": 9,
+      "type": "waitForNavigation",
+      "description": "ホームページの読み込みを待機",
+      "timeout": 10000
     }
   ],
   "validation": [
     {
       "type": "url",
-      "condition": "contains",
-      "expected": "secure.freee.co.jp",
+      "condition": "equals",
+      "expected": "https://secure.freee.co.jp/",
       "timeout": 5000,
-      "errorMessage": "freeeのドメインに遷移していません"
+      "errorMessage": "freeeホームページに遷移していません"
     }
   ],
   "metadata": {
