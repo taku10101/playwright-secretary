@@ -205,7 +205,7 @@ export const addDatabaseRowAction: ServiceAction = {
       // Fill in data
       // Note: This is simplified - actual implementation would need
       // to handle different property types (text, select, date, etc.)
-      for (const [key, value] of Object.entries(params.data as Record<string, any>)) {
+      for (const [, value] of Object.entries(params.data as Record<string, any>)) {
         await page.keyboard.type(String(value));
         await page.keyboard.press('Tab');
       }
